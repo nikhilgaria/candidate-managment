@@ -1,0 +1,134 @@
+<div class="container">
+  <h1>ADD CANDIDATE</h1>
+  <form name="f1" ng-submit="ADD_CANDID();">
+    <div class="form-row">
+      <input type="hidden" ng-model="CandiModel.hidden_id" />
+      <div class="form-group col-md-6 mb-3">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" name="name" id="name" ng-model="CandiModel.name"
+            placeholder="Enter Name" ng-required="true" placeholder="ravi">
+          <label for="name">Enter Name</label> <span class="text-danger"
+            ng-show="f1.name.$touched && f1.name.$error.required">name is required.</span>
+        </div>
+      </div>
+      <div class="form-group col-md-6 mb-3">
+        <div class="form-floating mb-3">
+          <input type="email" ng-model="CandiModel.email" class="form-control" id="email" name="cemail"
+            placeholder="Email" />
+          <label for="email">Email</label>
+          <span class="text-danger" ng-show="f1.cemail.$touched && f1.cemail.$error.email">Please enter valid
+            email</span>
+        </div>
+      </div>
+      <div class="form-group col-md-6 mb-3">
+        <div class="form-floating mb-3">
+          <input type="text" ng-model="CandiModel.contact" class="form-control" id="inputcontact4" name="contact"
+            placeholder="contact" ng-pattern="/^\d{10}$/" />
+          <label for="inputcontact4">Contact</label>
+          <span class="text-danger" ng-show="f1.contact.$touched && f1.contact.$error.pattern">Please enter valid
+            contact[10 digit and numeric value]]</span>
+        </div>
+      </div>
+      <div class="form-group col-md-6 mb-3">
+        <div class="form-floating mb-3">
+          <input type="password" ng-model="CandiModel.pass" class="form-control" id="inputPassword4"
+            placeholder="Password" ng-minlength="3" name="password" />
+          <label for="inputPassword4">Password</label>
+          <span class="text-danger" ng-show="f1.password.$touched && f1.password.$error.minlength">Please enter min 3
+            character</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-6 mb-3">
+      <div class="form-floating mb-3">
+        <input type="text" ng-model="CandiModel.address1" class="form-control" id="inputAddress"
+          placeholder="1234 Main St" />
+        <label for="inputAddress">Address</label>
+      </div>
+    </div>
+    <div class="form-group col-md-6 mb-3">
+      <div class="form-floating mb-3">
+        <input type="text" ng-model="CandiModel.address2" class="form-control" id="inputAddress2"
+          placeholder="Apartment, studio, or floor" />
+        <label for="inputAddress2">Address 2</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-3">
+        <div class="form-floating mb-3">
+          <input type="text" ng-model="CandiModel.city" class="form-control" id="inputCity" />
+          <label for="inputCity">City</label>
+        </div>
+      </div>
+      <div class="form-group col-md-6 mb-3">
+        <div class="form-floating mb-3">
+          <select id="inputState" ng-model="CandiModel.state" class="form-control">
+            <option selected value="">Choose...</option>
+            <option value="delhi">Delhi</option>
+            <option value="hyderabad">hyderabad</option>
+            <option value="mumbai">mumbai</option>
+          </select>
+          <label for="inputState">State</label>
+        </div>
+      </div>
+      <div class="form-group col-md-6 mb-3">
+        <div class="form-floating mb-3">
+          <input type="text" ng-model="CandiModel.pincode" class="form-control" id="inputpincode" ng-pattern="/^\d{6}$/"
+            name="pincode" />
+          <label for="inputpincode">Pincode</label>
+          <span class="text-danger" ng-show="f1.pincode.$touched && f1.pincode.$error.pattern">Please enter valid
+            pincode</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <button type="submit" ng-if="CandiModel.hidden_id==0" class="btn btn-primary" ng-disabled="f1.$invalid" name="b1">
+        Save Data
+      </button>
+      <button type="submit" ng-if="CandiModel.hidden_id>0" class="btn btn-warning" name="b2">
+        Update Data
+      </button>
+    </div>
+  </form>
+  <br />
+  <h1>CANDIDATE List</h1>
+  <table class="table table-primary">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>email</th>
+        <th>contact</th>
+        <th>pass</th>
+        <th>address1</th>
+        <th>address2</th>
+        <th>city</th>
+        <th>state</th>
+        <th>pincode</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-ng-repeat="Candi in candi_data">
+        <td>{{ $index+1 }}</td>
+        <td>{{ Candi.name }}</td>
+        <td>{{ Candi.email }}</td>
+        <td>{{ Candi.contact }}</td>
+        <td>{{ Candi.pass }}</td>
+        <td>{{ Candi.address1 }}</td>
+        <td>{{ Candi.address2 }}</td>
+        <td>{{ Candi.city }}</td>
+        <td>{{ Candi.state }}</td>
+        <td>{{ Candi.pincode }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" ng-click="editCandi(Candi.id)">
+            Edit
+          </button>
+          <button class="btn btn-sm btn-danger" ng-click="deleteCandi(Candi.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
